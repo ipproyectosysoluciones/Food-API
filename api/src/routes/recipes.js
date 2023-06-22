@@ -1,14 +1,13 @@
-const { index, store, } = require('../handlers/recipe');
 const { Router } = require( 'express' );
+const { getRecipeById, getRecipeByName } = require( '../controllers/getRecipe' );
+const postRecipe = require( `../controllers/postRecipe.js` );
+// const deleteRecipe = require( '../controllers/deleteRecipe.js' );
+
 const router = Router();
 
+router.get( "/:id", getRecipeById );
+router.get( "/", getRecipeByName );
+router.post( "/", postRecipe );
+// router.delete( "/:id", deleteRecipe );
 
-//Grupo de rutas
-router
-  .route( '/' )
-  .get( index );
-  // .post( store );
-
-router.get( '/:id' );
-
-module.exports = router;
+module.exports = router; 

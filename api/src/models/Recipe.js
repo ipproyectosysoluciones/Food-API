@@ -7,31 +7,39 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
     },
     image: {
       type: DataTypes.STRING,
+      defaultValue: 'https://pixabay.com/photos/food-breakfast-dish-meal-toast-5981232/',
       validate: {
-        isUrl: true
+        isUrl: true,
       }
     },
     summary: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
     healthScore: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      validate: {
+        min: 0,
+        max: 100,
+      },
     },
-    time: {
-      type: DataTypes.INTEGER
+    steps: {
+      type: DataTypes.JSON,
+      defaultValue: {},
     },
-    created: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-    }
+  },{ 
+    timestamp: false,
   });
 };

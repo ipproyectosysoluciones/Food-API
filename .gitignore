@@ -100,6 +100,9 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+# SQL Tools
+Food.session.sql
+
 # TernJS port file
 .tern-port
 
