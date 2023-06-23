@@ -2,41 +2,23 @@ require( 'dotenv' ).config();
 const axios = require( 'axios' );
 const { API_KEY } = process.env;
 const { Recipe, Diet } = require( '../db.js' );
+const { reduceObjectsRecipes, modifyDietAttributes } = require( '../helpers/recipes' );
 const { Op } = require( 'sequelize' );
 
 const LIMIT = 100;
-// const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${LIMIT}`;
-const URL = `http://localhost:8080/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${LIMIT}`;
-
-const reduceObjectsRecipes = ( recipes ) => {
-  return {
-    id: recipes.id,
-    name: recipes.title,
-    image: recipes.image,
-    summary: recipes.summary,
-    healthScore: recipes.healthScore,
-    steps: recipes.analyzedInstructions[0] ? recipes.analyzedInstructions[0].steps.reduce( ( obj, steps ) => {
-      obj[ steps.number ] = steps.step
-      return obj;
-    }, {} ) : {},
-    diets: recipes.diets,
-  }
-};
-
-const modifyDietAttributes = ( recipe ) => {
-  recipe = recipe.toJson();
-  recipe.diets = recipe.diets.map( diet => diet.name );
-  return recipe;
-};
+const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${LIMIT}`;
+// const URL = `http://localhost:8080/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=${LIMIT}`;
 
 const getRecipeById = async ( req, res ) => {
   const { id } = req.params;
 
   try {
     if ( id === undefined ) return res.status( 404 ).send( 'no hay ID' );
-    // https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}
+    
+    // http://localhost:8080/recipes/${id}/information?apiKey=${API_KEY}
+
     if ( !id.includes( "-" ) ) {
-      const recipeApi = await axios.get( `http://localhost:8080/recipes/${id}/information?apiKey=${API_KEY}` )
+      const recipeApi = await axios.get( `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}` )
       .then( resp => resp.data );
 
       if ( recipeApi.hasOwnProperty( 'id' )) return res.json( reduceObjectsRecipes( recipeApi ));
