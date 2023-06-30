@@ -1,4 +1,4 @@
-const controller = require('../controllers/getDiets');
+const controller = require( '../controllers/getDiets' );
 
 const getDiets = async( req, res ) =>{
   try {

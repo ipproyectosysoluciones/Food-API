@@ -2,7 +2,7 @@ require( 'dotenv' ).config();
 const axios = require( 'axios' );
 const { API_KEY } = process.env;
 const { Recipe, Diet } = require( '../db.js' );
-const { reduceObjectsRecipes, modifyDietAttributes } = require( '../helpers/recipes' );
+const { reduceObjectsRecipes, modifyDietAttributes } = require( '../helpers/recipesHelpers.js' );
 const { Op } = require( 'sequelize' );
 
 const LIMIT = 100;

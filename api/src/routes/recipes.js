@@ -1,6 +1,6 @@
 const { Router } = require( 'express' );
-const { getRecipeById, getRecipeByName } = require( '../controllers/getRecipe' );
-const postRecipe = require( `../controllers/postRecipe.js` );
+const { getRecipeById, getRecipeByName } = require( '../controllers/getRecipes' );
+const postRecipe = require( '../controllers/postRecipes' );
 // const deleteRecipe = require( '../controllers/deleteRecipe.js' );
 
 const router = Router();
