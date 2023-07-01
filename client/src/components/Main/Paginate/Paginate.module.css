@@ -1,0 +1,9 @@
+.paginate {
+  position: relative;
+  display: flex;
+  gap: 2vw;
+  justify-content:flex-start;
+  padding: 1rem 1vw ;
+  min-height: 30rem;
+  width: 96vw;
+}

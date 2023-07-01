@@ -1,0 +1,11 @@
+export const GET_ALL_RECIPES = 'GET_ALL_RECIPES';
+export const GET_ALL_DIETS = 'GET_ALL_DIETS';
+export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const ORDER = 'ORDER';
+export const FILTER_BY_DIETS = 'FILTER_BY_DIETS';
+export const RESET_RECIPES = 'RESET_RECIPES';
+export const LOADING = 'LOADING';
+export const SAVE_RECIPES = 'SAVE_RECIPES';
+export const NEW_RECIPE = 'NEW_RECIPE';

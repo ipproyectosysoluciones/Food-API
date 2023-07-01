@@ -108,3 +108,6 @@ Food.session.sql
 
 # package-lock.json
 package-lock.json
+
+# VSCode build output
+.vscode/

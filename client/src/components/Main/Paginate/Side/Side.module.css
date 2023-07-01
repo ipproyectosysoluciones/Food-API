@@ -1,0 +1,77 @@
+.side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .5em;
+  padding: 1.2rem;
+  min-width: 15rem;
+  height: fit-content;
+  background-color: rgba(56, 56, 56, 0.985);
+  color: rgb(208, 207, 207);
+  border-radius: 0.4rem / 0.4rem;
+}
+
+.side> h2 {
+  font-size: 1.2rem;
+  color: hsla(39, 100%, 50%, 0.866);
+}
+
+.line {
+  color: white;
+  width: 95%;
+}
+
+.filterConteiner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: .5rem;
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
+.orderConteiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.orderConteiner>button,
+.resetButton {
+  color: rgb(243, 243, 242);
+  border:none;
+  font-weight: bolder;
+  background-color: rgba(89, 89, 89, 0.849);
+  width: 7rem;
+  padding: .4rem 0rem;
+}
+
+.orderConteiner>button:hover,
+.resetButton:hover {
+  scale: 1.04;
+}
+
+.orderConteiner>button:active,
+.resetButton:active {
+  color: rgb(65, 65, 65);
+  background-color: rgba(255, 255, 255, 0.724);
+  scale: 0.9;
+}
+
+.orderConteiner>button:disabled {
+  color: rgb(65, 65, 65);
+  background-color: hsla(39, 100%, 50%, 0.866);
+}
+
+.orderConteiner>button:disabled:hover {
+  scale: 1;
+}
+
+.orderConteiner>button:disabled:active {
+  scale: 1;
+}
