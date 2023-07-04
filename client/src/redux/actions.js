@@ -87,40 +87,34 @@ export const newRecipe = () => {
 };
 
 export const getRecipesBackend = () => {
-  return async ( dispatch ) => {
+  return ( dispatch ) => { 
     dispatch( loading( true ) );
-    try {
-      const response = await axios.get( '/recipes' );
-      dispatch( getAllRecipes( response.data ) );
-      dispatch( getDietsBackend() );
-    } catch ( error ) {
-      alert( "Ocurrió un error al cargar las recetas. Recargue la página, por favor." );
-      dispatch( getDietsBackend() );
-    }
+    axios.get( '/recipes' )
+    .then( response => { dispatch( getAllRecipes( response.data ) );
+      dispatch( getDietsBackend() )
+    })
+    .catch( err => { alert( "ocurrio un error al cargar las recetas, recargue la pagina por favor" );
+      dispatch( getDietsBackend() )
+    }); 
   };
 };
 
 export const getDietsBackend = () => {
-  return async ( dispatch ) => {
-    try {
-      const response = await axios.get( '/diets' );
-      dispatch( getAllDiets( response.data ) );
-    } catch ( error ) {
-      console.log( 'Solicitud de dietas al servidor fallida', error.message );
-    }
-  };
+  return ( dispatch ) => {
+    axios.get( '/diets' )
+    .then( response => dispatch( getAllDiets( response.data )))   
+    .catch( error => console.log( 'Solicitud de dietas al servidor fallida', error )); 
+  }
 };
 
 export const getRecipesByName = ( name ) => {
-  return async ( dispatch ) => {
-    dispatch( loading( true ) );
-    try {
-      const response = await axios.get( `/recipes?name=${ name }` );
-      dispatch( saveRecipes( response.data ) );
-      dispatch( loading( false ) );
-    } catch ( error ) {
-      console.log( 'Solicitud de recetas por nombre al servidor fallida', error.message );
-    }
+  return ( dispatch ) => {
+    dispatch(loading( true ));
+    axios.get( `/recipes/?name=${name}` )
+    .then( response => { dispatch( saveRecipes( response.data )); 
+      dispatch( loading( false ))
+    })  
+    .catch( error => console.log( 'Solicitud de recetas por nombre al servidor fallida', error )); 
   };
 };
 

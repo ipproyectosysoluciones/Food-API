@@ -33,14 +33,20 @@ class Header extends Component {
   returnHome = ( event ) => {
     event.preventDefault();
 
-    ( this.props.newRecipeCreate ) ? this.props.getRecipesBackend() : this.props.resetRecipes();
+    ( this.props.newRecipeCreate ) 
+    ? this.props.getRecipesBackend() 
+    : this.props.resetRecipes();
+
     this.history.push( '/' );
   };
 
   returnPaginate = ( event ) => {
     event.preventDefault();
 
-    ( this.props.newRecipeCreate ) ? this.props.getRecipesBackend() : this.props.resetRecipes();
+    ( this.props.newRecipeCreate ) 
+    ? this.props.getRecipesBackend() 
+    : this.props.resetRecipes();
+
     this.props.history.push( '/recipes' );
   };
   
@@ -51,16 +57,33 @@ class Header extends Component {
         <div className={ style.inputsContainer }>
         {
           ( this.props.location.pathname === '/recipes/create' ) 
-          ? <button onClick={ this.returnPaginate } className={ style.buttonCreate }>Volver</button> 
-          : (<>
-              <NavLink style={ { textDecoration: 'none' } } to='/recipes/create'>
-                <button className={ style.buttonCreate }>Crear Receta</button>
-              </NavLink>
-              <form onSubmit={ this.searchSubmit } className={ style.search }>
-                <input type='text' value={this.state.inputValue} onChange={ this.changeHandler }/>
-                <input className={ style.buttonCreate } value={ 'Buscar' } type='submit' />
-              </form>
-            </>)
+          ? <button 
+              onClick={ this.returnPaginate } 
+              className={ style.buttonCreate }
+            >Volver
+            </button> 
+          : (
+              <>
+                <NavLink style={ { textDecoration: 'none' } } to='/recipes/create'>
+                  <button className={ style.buttonCreate }>Crear Receta</button>
+                </NavLink>
+                <form 
+                  onSubmit={ this.searchSubmit } 
+                  className={ style.search }
+                >
+                  <input 
+                    type='text' 
+                    value={this.state.inputValue} 
+                    onChange={ this.changeHandler }
+                  />
+                  <input 
+                    className={ style.buttonCreate } 
+                    value={ 'Buscar' } 
+                    type='submit' 
+                  />
+                </form>
+              </>
+            )
           }
         </div>
       </div>

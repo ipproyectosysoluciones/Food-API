@@ -20,7 +20,11 @@ class RequiredInfo extends Component {
             type="text"
             autoComplete="off" 
           />
-          { !nameValidation ? <span className={ style.textError }>Debe ingresar un nombre</span> : null }
+          { 
+            !nameValidation 
+            ? <span className={ style.textError }>Debe ingresar un nombre</span> 
+            : null 
+          }
         </label>
 
         <label >URL-Imagen
@@ -36,30 +40,38 @@ class RequiredInfo extends Component {
 
         <label >Health Score*
           <input 
-            className={ style[ `dato${ !healthScoreValidation ? `Error` : ""}` ] } 
+            className={ style[ `dato${ !healthScoreValidation ? `Error` : "" }` ] } 
             name={ "healthScore" }
             value={ healthScore }
             onChange={ changeHandler }
             type="number"
             autoComplete="off" 
           />
-          { !healthScoreValidation ? <span className={ style.textError }>Min: 0 - Max: 100</span> : null }
+          { 
+            !healthScoreValidation 
+            ? <span className={ style.textError }>Min: 0 - Max: 100</span> 
+            : null
+          }
         </label >
 
           <label >Descripcion*
             <textarea  
-              className={style[`dato${!summaryValidation ? `Error` : ""}`]}
-              name={"summary"}
-              value={summary}
-              onChange={changeHandler}
+              className={ style[ `dato${ !summaryValidation ? `Error` : "" }` ] }
+              name={ "summary" }
+              value={ summary }
+              onChange={ changeHandler }
               type="text"
               autoComplete="off" 
             />
-            { !summaryValidation ? <span className={ style.textError }>Debe ingresar una descripcion</span> : null }
+            { 
+              !summaryValidation 
+              ? <span className={ style.textError }>Debe ingresar una descripcion</span> 
+              : null
+            }
           </label>
       </div>
     )
   };
 }
 
-export default RequiredInfo
+export default RequiredInfo;

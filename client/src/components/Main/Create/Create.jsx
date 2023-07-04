@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { userHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { axios } from 'axios';
+import axios from 'axios';
 import RequiredInfo from './RequiredInfo/RequiredInfo';
 import ChooseDiets from './ChooseDiets/ChooseDiets';
 import Steps from './Steps/Steps';
@@ -10,7 +10,7 @@ import { getRecipesBackend, newRecipe, resetRecipes } from '../../../redux/actio
 
 const Create = () => {
 
-  const history = userHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const newRecipeCreate = useSelector( state => state.newRecipeCreate );
 
@@ -23,33 +23,45 @@ const Create = () => {
     steps: {},
   });
 
+  const [ validation, setValidation ] = useState({
+    nameValidation: false,
+    healthScoreValidation: true,
+    summaryValidation: false
+  });
+
   const [ enabledSubmit, setEnabledSubmit ] = useState( false );
   // /* const [newRecipe, setNewRecipe] = useState(false) */
 
   useEffect( () => {
     const { nameValidation, healthScoreValidation, summaryValidation } = validation;
 
-    return ( nameValidation && healthScoreValidation && summaryValidation ) ?
-      setEnabledSubmit( true ) :
-      setEnabledSubmit( false );
+    return ( nameValidation && healthScoreValidation && summaryValidation ) 
+      ? setEnabledSubmit( true ) 
+      : setEnabledSubmit( false );
 
-  }, [ setEnabledSubmit, validation ] );
+  }, [ setEnabledSubmit, validation ]);
 
   const changeHandler = ( event ) => {
     setInfoForm({
       ...infoForm,
-      [ event.target.name ]: ( event.target.name !== 'healthScore' ) ? event.target.value : parseInt( event.target.value ),
+      [ event.target.name ]: ( event.target.name !== 'healthScore' ) 
+        ? event.target.value 
+        : parseInt( event.target.value ),
     });
 
     if ( event.target.name === 'healthScore' ) {
       setValidation({
         ...validation,
-        healthScoreValidation: (event.target.value < 0 || event.target.value > 100) ? false : true,
+        healthScoreValidation: ( event.target.value < 0 || event.target.value > 100 ) 
+          ? false 
+          : true,
       });
     } else {
       setValidation({
         ...validation,
-        [ `${ event.target.name }Validation` ] : ( /^\s*$/.test(event.target.value) ) ? false : true,
+        [ `${ event.target.name }Validation` ] : ( /^\s*$/.test( event.target.value ) ) 
+          ? false 
+          : true,
       });
     }
   };
@@ -81,7 +93,10 @@ const Create = () => {
     const copyArr = Object.entries( infoForm.steps );
     const newSteps = {};
 
-    copyArr.forEach( ([ key, value ] ) => ( parseInt( key ) === ( copyArr.length ) ) ? null : newSteps[ key]  = value );
+    copyArr.forEach( ( [ key, value ] ) => ( parseInt( key ) === ( copyArr.length ) ) 
+      ? null 
+      : newSteps[ key ]  = value 
+    );
 
     setInfoForm({
       ...infoForm,
@@ -97,8 +112,11 @@ const Create = () => {
   };
 
   const goBack = () => {
-    ( newRecipeCreate ) ? dispatch( getRecipesBackend() ) : dispatch( resetRecipes() );
-    history.push( '/recipes' );
+    ( newRecipeCreate ) 
+      ? dispatch( getRecipesBackend() ) 
+      : dispatch( resetRecipes() 
+    );
+    navigate.push( '/recipes' );
   };
 
   const deleteStepByN = (n) => {
@@ -119,16 +137,20 @@ const Create = () => {
     try {
       event.preventDefault();
 
-      const res = await axios.post( '/recipes', { ...infoForm, name: infoForm.name.trim(), ummary: infoForm.summary.trim(), } );
+      const res = await axios.post( '/recipes', { ...infoForm, name: infoForm.name.trim(), summary: infoForm.summary.trim(), } );
 
       if ( res.status === 404 ){ 
           alert( "error al crear receta! No repita el nombre de una receta ya creada y complete todos los campos requeridos" );
       } else {
-      const createAgain = window.confirm( "¿Crear otra receta?" );
+        const createAgain = window.confirm( "¿Crear otra receta?" );
+            
+        if ( !createAgain ) { 
+          dispatch( getRecipesBackend() ); 
+          return navigate.push( '/recipes' ); 
+        }  
           
-      if ( !createAgain ) { dispatch( getRecipesBackend() ); return history.push( '/recipes' ); }  
         dispatch( newRecipe() );
-          
+            
         setInfoForm({
           name: "",
           image: "",
@@ -145,12 +167,11 @@ const Create = () => {
         });
       }
     } catch ( error ) {
-        alert( "error al conectar con el servidor! no se pudo crear la receta" );
-        newRecipeCreate && dispatch( getRecipesBackend() );
-        history.push( '/recipes' );
+      alert( "error al conectar con el servidor! no se pudo crear la receta" );
+      newRecipeCreate && dispatch( getRecipesBackend() );
+      navigate.push( '/recipes' );
     }
   };
-
 
   return (
     <div className={ style.createConteiner }>
@@ -182,8 +203,17 @@ const Create = () => {
           deleteStepByN={ deleteStepByN }
         />
 
-        <input type="button" className={ style.cancelButton } onClick={ goBack } value="Volver" />
-        <input type="submit" className={ style.createButton } disabled={ !enabledSubmit } value="Crear" />
+        <input 
+          type="button" 
+          className={ style.cancelButton } 
+          onClick={ goBack } value="Volver" 
+        />
+        <input 
+          type="submit" 
+          className={ style.createButton } 
+          disabled={ !enabledSubmit } 
+          value="Crear" 
+        />
       </form>
     </div>
   )
