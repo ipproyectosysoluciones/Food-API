@@ -1,0 +1,76 @@
+.createConteiner {
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 30rem;
+  width: 84vw;
+  gap: 0.5rem;
+  margin: 1.5rem 0rem 2.5rem 0rem;
+  padding: 2rem 4vw 5rem 4vw;
+  background-color: rgba(56, 56, 56, 0.985);
+  border-radius: 2rem;
+  
+}
+
+.createConteiner hr {
+  border-color: rgba(240, 240, 240, 0.818);
+  width: 100%
+}
+
+.createConteiner > h2 {
+  font-size: 2rem;
+  color: rgba(249, 230, 102, 0.818);
+}
+
+.createConteiner h3 {
+  font-size: 1.5rem;
+  color: rgba(249, 230, 102, 0.818);
+  font-weight: 500;
+}
+
+.form {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  color: rgb(208, 207, 207);
+}
+
+.form > div:nth-child(1){
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form > input {
+  position:absolute;
+  bottom: -6rem;
+  padding: 1rem 3rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.form > input:hover{
+  scale: 1.05;
+}
+.form > input:active{
+  scale: 0.95;
+}
+
+.cancelButton {
+  right: 15rem;
+}
+.createButton {
+  right: 5rem;
+}
+
+.createButton:disabled {
+  background-color: rgb(83, 83, 83);
+}
